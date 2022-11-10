@@ -1,0 +1,26 @@
+{% extends 'home.html' %}
+{% load static %}
+   
+    
+
+
+   {%block content%}
+   <div class="history">
+       
+            
+    {%for orderr in orders %} 
+    <div >
+       
+        
+        <div style="flex:2"><p> Time: {{orderr.Created_date}}</p></div>
+        <div style="flex:1"><p> Address: {{orderr.address}},  {{orderr.city}}</p></div>
+        <div style="flex:1"><p>Total: {{orderr.get_cart_total}}</p></div>
+        <a href="{% url 'detail' orderr.id %}"> <button class="changeP"> see detail </button> </a>
+    </div>
+    <hr>
+    <hr>
+    {% endfor %}
+    
+
+</div>
+   {%endblock%}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> sign up </title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body style="background-color:hsl(0, 29%, 95%)">
+        
+
+        <div class="view full-page-intro" style="background-image: url('https://www.google.com.np/imgres?imgurl=https%3A%2F%2Fwww.w3schools.com%2Fw3css%2Fimg_lights.jpg&imgrefurl=https%3A%2F%2Fwww.w3schools.com%2Fw3css%2Fw3css_images.asp&docid=R0KnAtfyBDsyiM&tbnid=kwgHAQqTiLQXLM%3A&vet=10ahUKEwj5z9nr277bAhWBbX0KHZzyAS8QMwitASgBMAE..i&w=600&h=400&bih=702&biw=1366&q=image&ved=0ahUKEwj5z9nr277bAhWBbX0KHZzyAS8QMwitASgBMAE&iact=mrc&uact=8'); background-repeat: no-repeat; background-size: cover;">
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+              <div class="container">
+                <div class="row wow fadeIn">
+                  
+                  <div class="col-md-6 col-xl-5 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <form action="{% url 'addUser'%}" method="POST">
+                            {% csrf_token %}
+                          <p class="h4 text-center mb-4">Sign up</p>
+                          <div class="md-form">
+                             <i class="fa fa-user prefix grey-text"></i>
+                             <input type="text" id="materialFormRegisterNameEx" class="form-control" name="username">
+                             <label for="materialFormRegisterNameEx">Your Username</label>
+                          </div>
+                          <div class="md-form">
+                             <i class="fa fa-envelope prefix grey-text"></i>
+                             <input type="email" id="materialFormRegisterEmailEx" class="form-control" name="email">
+                             <label for="materialFormRegisterEmailEx">Your email</label>
+                          </div>
+                          
+                          <div class="md-form">
+                            <i class="fa fa-lock prefix grey-text"></i>
+                            <input type="password" id="materialFormRegisterPasswordEx" class="form-control" name="password">
+                            <label for="materialFormRegisterPasswordEx">Your password</label>
+                          </div>
+
+                          <div class="md-form">
+                            <i class="fa fa-user prefix grey-text"></i>
+                            <input type="text" id="materialFormRegisterNameEx" class="form-control" name="name">
+                            <label for="materialFormRegisterNameEx">Your Name</label>
+                         </div>
+
+                          <div class="md-form">
+                                <i class="fa fa-exclamation-triangle prefix grey-text"></i>
+                                <input type="text" id="materialFormRegisterConfirmEx" class="form-control" name="sdt">
+                                <label for="materialFormRegisterPasswordEx">Your Phone Number</label>
+                          </div>
+                          
+                          <div class="text-center mt-4" style="display:flex;justify-content:space-around;">
+                            <a href="{% url 'login'%}" class="blue-text"> Sign in</a>
+                           <input class="btn btn-primary" type="submit" data-toggle="modal" data-target="#myModal" value="Register">
+                          </div>
+                       </form> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+    </body>
+</html>

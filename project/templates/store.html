@@ -1,0 +1,60 @@
+ {% extends 'home.html' %}
+ {% load static %}
+    {%block content%}
+        <div class="row">
+            {% for book in book_list %}
+                <div class="col-lg-4 items" style="margin-top:10px">
+                    <img class="thumbnail" src="/project/media/{{book.image}}">
+                    <div class="box-element product" style="position:relative;">
+                        <h6><strong>{{book.name}}</strong>  
+                            <label
+                            style="position:absolute;right:10px;font-size:14px"
+                            >{{book.price}} đ</label></h6>
+                        <p style="font-size:11px;color:red">{{book.category}}</p>
+                        <hr>
+                        {% if b %}
+                        <a href="{% url 'updateItemCart' user.id book.id %}">
+                            <button class=" btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login' %}">
+                            <button class=" btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                        </a>
+                        {% endif %}
+                        <a href="{% url 'detailProduct' book.id %}" class="btn btn-outline-success view-infor">View</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="pagination">
+        <ul>    
+          
+    {% if book_list.has_previous %}    
+          <a href="?page={{book_list.previous_page_number}}"><li>&lt;</li></a>
+    {%else%}
+        <a href="?page=1"><li>&lt;</li></a>
+     {%endif%}
+     {% for i in book_list.paginator.page_range %}
+        
+    {%if i == book_list.number %}
+            <a class="is-active" href="?page={{i}}"><li>{{i}}</li></a>
+    {%else%}
+            <a  href="?page={{i}}"><li>{{i}}</li></a>
+    {%endif%} 
+       
+       
+    {%endfor%}
+    {% if book_list.has_next %}
+          <a href="?page={{book_list.next_page_number}}"><li>&gt;</li></a>
+    {%else%}
+          <a href="?page=6"><li>&gt;</li></a>
+    {%endif%}
+        </ul>
+    </div>
+
+    <div class="footer"></div>
+
+    {%endblock%}
+   

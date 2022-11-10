@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+{% load static %}
+
+
+
+   {%block content%}
+   <form  style="text-align:center" method="post" action="{% url 'changePass' %}">
+      {% csrf_token %}
+    <p> Nhập mật khẩu cũ:  <input type="password" placeholder="old password..." name="old"></p>
+    <p> Nhập mật khẩu mới:  <input type="password" placeholder="new password..." name="new"></p>
+    <p> Xác nhận mật khẩu mới: <input type="password" placeholder="confirm..." name="confirm"></p>
+    <p> <input class="changeP" type="submit" value="save" ></p>
+    
+   </div>
+   
+   {%endblock%}

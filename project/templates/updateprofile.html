@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+{% load static %}
+
+
+
+   {%block content%}
+   <form style="text-align:center " method="post" action="{%url 'updateprofile'%}">
+      {% csrf_token %}
+    <p> Name <input type="text"  name="name" value="{{user.name}}"></p>
+    <p> Phone <input type="text"  name="sdt" value="{{user.phoneNumber}}"></p>
+    
+    <p> <input class="changeP" type="submit" value="save"></p>
+    
+   </form>
+   
+   {%endblock%}

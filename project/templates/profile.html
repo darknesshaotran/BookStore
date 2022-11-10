@@ -1,0 +1,17 @@
+{% extends 'home.html' %}
+{% load static %}
+
+
+
+   {%block content%}
+   <div>
+
+    <p class="profile"> Name: {{user.name}} </P>
+    <p class="profile"> PhoneNumber: {{user.phoneNumber}} </P>
+    <p class="profile"> Username : {{user.user.username}} </P>
+   </div>
+   <div  class="container">
+    <a href="{% url 'updateprofileForm' %}" style="text-decoration: none;"> <button class="form-control mr-sm-2 sss"> Cập nhập thông tin </button></a>
+    <a href="{% url 'changepassForm' %}" style="text-decoration: none;"> <button class="form-control mr-sm-2 sss"> đổi mật khẩu </button></a>
+    </div>
+   {%endblock%}
