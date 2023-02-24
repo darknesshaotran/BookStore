@@ -5,6 +5,7 @@ class customer(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,null=True,blank=True)
     name = models.CharField(max_length=30,null=True)
     phoneNumber = models.CharField(max_length=11,null=True)
+    avatar = models.ImageField(null=True,blank=True)
     def __str__(self):
         return self.name
 class Category(models.Model):
@@ -13,6 +14,7 @@ class Category(models.Model):
         return self.name
 
 class Book(models.Model):
+    
     name = models.CharField(max_length=40,null=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True) 
     price = models.IntegerField()
@@ -20,6 +22,10 @@ class Book(models.Model):
     description = models.TextField(null=True)
     def __str__(self):
         return self.name
+class comment(models.Model):
+    customer = models.ForeignKey(customer,on_delete=models.CASCADE,blank=True,null=True)
+    book = models.ForeignKey(Book,on_delete=models.CASCADE,blank=True,null=True)
+    review = models.TextField(null=True)
 class Cart(models.Model):
     customer = models.ForeignKey(customer,on_delete=models.CASCADE,blank=True,null=True) 
     Created_date = models.DateTimeField(auto_now_add=True)

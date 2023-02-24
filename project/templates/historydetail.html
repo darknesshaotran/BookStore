@@ -16,6 +16,7 @@
         <div style="flex:2"><p>{{item.product.name}}</p></div>
         <div style="flex:1"><p>{{item.product.price}}</p></div>
         <div style="flex:1"><p>x{{item.quantity}}</p></div>
+        <div style="flex:1"><a href="{%url 'feedbackForm' item.product.id %}"><button>feed back</button></a></div>
     </div>
     {% endfor %}
     <h5>Items:   {{orderr.get_cart_items}}</h5>

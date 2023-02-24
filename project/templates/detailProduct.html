@@ -47,6 +47,16 @@
                 </div>
             </div>
         </div>
+
+
+       
     </div>
+    
    </div>
+   <div>
+    {%for comment in comments %}
+   
+    <li> {{comment.customer.name}} : {{comment.review}} </li>
+    {% endfor %}
+</div>
    {%endblock%}

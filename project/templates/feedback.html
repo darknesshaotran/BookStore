@@ -1,0 +1,20 @@
+{% extends 'home.html' %}
+{% load static %}
+
+
+
+   {%block content%}
+    <div>
+        {{book.name}}: 
+    </div>
+   <form  style="text-align:center" method="post" action="{% url 'rendercomment' book.id %}">
+      {% csrf_token %}
+    
+    <p> Nhập review:  <input type="text" placeholder="give me some review..." name="cmt"></p>
+   
+    <p> <input class="changeP" type="submit" value="save" ></p>
+    <p style="color:red"> {{error}} </p>
+    
+   </div>
+   
+   {%endblock%}

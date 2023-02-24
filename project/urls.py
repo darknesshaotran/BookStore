@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path,include
 from . import views
+from django.contrib import admin
 urlpatterns = [
     path('register/',views.registerForm,name="register"),
     path('register/addUser/', views.registerMember, name='addUser'),
@@ -20,6 +21,10 @@ urlpatterns = [
     path('profile/changepassForm',views.changepassForm,name="changepassForm"),
     path('profile/change',views.changePass,name="changePass"),
     path('detail/<int:bookID>',views.detailProduct,name="detailProduct"),
+    path('feedback/<int:bookID>',views.feedbackForm,name="feedbackForm"),
+    path('feedback/<int:bookID>/a',views.feedback,name="rendercomment"),
+    
+    
     
     
 

@@ -27,7 +27,7 @@ def registerMember(request):
     user.save()
     customerr = customer.objects.create(user=user,name=name,phoneNumber=sdt)
     customerr.save()
-    return HttpResponse('register successfully')
+    return render(request,'login.html',{"error":"register successfully","color":"green"})
 
 
 
@@ -42,11 +42,12 @@ class loginn(View):
         if user is not None:
             login(request,user)
             if request.user.is_superuser:
-                return HttpResponse("đây là trang admin")
+                return HttpResponse("<h1><a  style='margin-left:45%;text-decoration:none' href='/admin'> vào trang admin</a></h1><h1><a  style='margin-left:45%;text-decoration:none' href='/login'> đăng xuất</a></h1>")
             else:
                 return redirect('home')
         else:
-            return HttpResponse("login fail")
+            
+            return render(request,'login.html',{"error":"invalid username or password","color":"red"})
         
  #############log out  ################# 
 
@@ -59,12 +60,12 @@ def logoutUser(request):
 
 ##############################Home######################### 
 def homePage(request):
-    
+    123
     
     search=''
     if(request.GET.get('s') == 'Search'):
         search=request.GET.get('search')    
-    book = Book.objects.filter(name__icontains=search)
+    book = Book.objects.filter(name__icontains=search).order_by('-id')
     p=Paginator(book,10)
     page = request.GET.get('page')
     book_list = p.get_page(page)
@@ -215,6 +216,9 @@ def changepassForm(request):
     return render(request,'changepass.html',context)
 
 def changePass(request):
+    customerr = request.user.customer
+    order = Cart.objects.get(customer=customerr,complete=False) #trả về or tạo mới 1 cart của khách hàng đó  
+    context = {'nt': "logout",'b':True,'user':customerr,'order':order,'error':"đổi mật khẩu thất bại"}
     user = request.user
     oldP = request.POST['old']
     newP = request.POST['new']
@@ -226,19 +230,39 @@ def changePass(request):
             login(request,user)
             return redirect('profile')
         else:
-            return HttpResponse("sai thông tin a")
+            return render(request,'changepass.html',context)
     else:
-        return HttpResponse("sai thông tin b ")
+       return render(request,'changepass.html',context)
         
 
 
 def detailProduct(request,bookID):
     book = Book.objects.get(id=int(bookID))
+    cmt  = book.comment_set.all()
     if request.user.is_authenticated:
         customerr = request.user.customer
         order = Cart.objects.get(customer=customerr,complete=False) #trả về or tạo mới 1 cart của khách hàng đó  
-        context = {'nt': "logout",'b':True,'user':customerr,'order':order,'book':book}
+        
+        context = {'nt': "logout",'b':True,'user':customerr,'order':order,'book':book,'comments':cmt}
     else:
-        context = {'nt': "login",'b':False,'book':book}
+        context = {'nt': "login",'b':False,'book':book,'comments':cmt}
         
     return render(request,'detailProduct.html',context)
+
+def feedbackForm(request,bookID):
+    book = Book.objects.get(id=int(bookID))
+    customerr = request.user.customer
+    order = Cart.objects.get(customer=customerr,complete=False)    
+    context = {'nt': "logout",'b':True,'user':customerr,'order':order,'book':book}
+    return render(request,'feedback.html',context)
+
+def feedback(request,bookID):
+    customerr = request.user.customer
+    
+    bookk = Book.objects.get(id=int(bookID))
+   
+    cmt = request.POST['cmt']
+    comment.objects.create(customer=customerr,book=bookk,review=cmt)
+    
+    
+    return redirect('home')
